@@ -32,11 +32,9 @@ Add the user to the group.
 
 ## Usage
 
-Use the same options when uploading and downloading.
-
 ### Configuring
 
-Configure the gem for use before uploading or downloading.
+Configure the gem to use the same options when uploading and downloading.
 
 ```` rb
 S3Sync.configure do |config|
@@ -45,6 +43,12 @@ S3Sync.configure do |config|
   config.region = "us-east-1"
   config.bucket = "my-backups"
   config.secret_phrase = "my-s3cr3t"
+  config.files = [
+    File.join(Dir.home,".bash_profile"),
+    File.join(Dir.home,".gitconfig"),
+    File.join(Dir.home,".ssh","config")
+  ]
+  config.downloads_dir = File.join(Dir.home,"Desktop","my-s3-downloads")
 end
 ````
 
@@ -53,28 +57,22 @@ end
 Upload files from your computer to s3.
 
 ```` rb
-S3Sync::Upload.new(:files => [
-  "#{Dir.home}/.bash_profile",
-  "#{Dir.home}/.gitconfig",
-  "#{Dir.home}/.ssh/config"
-])
+S3Sync::Upload.new
 ````
 
 Files are stored in the **latest backups directory** which is named after the date (*YYYY-MM-DD*) of backup.
 
 ### Downloading
 
-Download previously-uploaded files from s3 to a staging directory on your desktop for further action. The staging directory helps mitigate the risk of accidentally over-writing your local files.
+Download previously-uploaded files from s3 to a staging directory for further action. The staging directory helps mitigate the risk of accidentally over-writing your local files.
 
 ```` rb
-S3Sync::Download.new(:files => [
-  "#{Dir.home}/.bash_profile",
-  "#{Dir.home}/.gitconfig",
-  "#{Dir.home}/.ssh/config"
-])
+S3Sync::Download.new
 ````
 
-## Development
+## Contributing
+
+### Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 

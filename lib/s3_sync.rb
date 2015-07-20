@@ -12,7 +12,7 @@ module S3Sync
   end
 
   def self.configuration
-    @configuration ||= Configuration.new
+    @configuration ||= S3Sync::Configuration.new
   end
 
   def self.configure

@@ -4,25 +4,25 @@ module S3Sync
   RSpec.describe Download do
     describe '#new' do
       context "when configured" do
-        let(:options){
-          {
-            :key_id => ENV["AWS_S3_KEY_ID"],
-            :key_secret => ENV["AWS_S3_KEY_SECRET"],
-            :region => ENV["AWS_S3_REGION"],
-            :bucket => ENV["AWS_S3_BUCKET"],
-            :secret_phrase => ENV["AWS_S3_ENCRYPTION_PHRASE"],
-            :files => [
-              "#{Dir.home}/.bash_profile",
-              "#{Dir.home}/.gitconfig",
-              "#{Dir.home}/.ssh/config"
+        before do
+          S3Sync.configure do |config|
+            config.key_id = ENV["AWS_S3_KEY_ID"]
+            config.key_secret = ENV["AWS_S3_KEY_SECRET"]
+            config.region = ENV["AWS_S3_REGION"]
+            config.bucket = ENV["AWS_S3_BUCKET"]
+            config.secret_phrase = ENV["AWS_S3_ENCRYPTION_PHRASE"]
+            config.files = [
+              File.join(Dir.home,".bash_profile"),
+              File.join(Dir.home,".gitconfig"),
+              File.join(Dir.home,".ssh","config")
             ]
-          }
-        }
+          end
+        end
+
         it "downloads files from s3" do
-          S3Sync::Download.new(options)
-          local_dir = "#{Dir.home}/Desktop/s3-downloads/#{bucket}"
-          options[:files].each do |file|
-            local_file = File.join(local_dir, file)
+          download = S3Sync::Download.new
+          download.files.each do |file|
+            local_file = File.join(download.downloads_dir, download.bucket, file)
             expect(File.exist?(local_file))
           end
         end
