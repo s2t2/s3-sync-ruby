@@ -34,23 +34,30 @@ Add the user to the group.
 
 Use the same options when uploading and downloading.
 
+### Configuring
+
+Configure the gem for use before uploading or downloading.
+
+```` rb
+S3Sync.configure do |config|
+  config.key_id = "mykey123"
+  config.key_secret = "secret456"
+  config.region = "us-east-1"
+  config.bucket = "my-backups"
+  config.secret_phrase = "my-s3cr3t"
+end
+````
+
 ### Uploading
 
 Upload files from your computer to s3.
 
 ```` rb
-S3Sync::Upload.new(
-  :key_id => "mykey123",
-  :key_secret => "secret456",
-  :region => "us-east-1",
-  :bucket => "my-backups",
-  :secret_phrase => "my-s3cr3t",
-  :files => [
-    "#{Dir.home}/.bash_profile",
-    "#{Dir.home}/.gitconfig",
-    "#{Dir.home}/.ssh/id_rsa.pub"
-  ]
-)
+S3Sync::Upload.new(:files => [
+  "#{Dir.home}/.bash_profile",
+  "#{Dir.home}/.gitconfig",
+  "#{Dir.home}/.ssh/config"
+])
 ````
 
 Files are stored in the **latest backups directory** which is named after the date (*YYYY-MM-DD*) of backup.
@@ -60,18 +67,11 @@ Files are stored in the **latest backups directory** which is named after the da
 Download previously-uploaded files from s3 to a staging directory on your desktop for further action. The staging directory helps mitigate the risk of accidentally over-writing your local files.
 
 ```` rb
-S3Sync::Download.new(
-  :key_id => "mykey123",
-  :key_secret => "secret456",
-  :region => "us-east-1",
-  :bucket => "my-backups",
-  :secret_phrase => "my-s3cr3t",
-  :files => [
-    "#{Dir.home}/.bash_profile",
-    "#{Dir.home}/.gitconfig",
-    "#{Dir.home}/.ssh/id_rsa.pub"
-  ]
-)
+S3Sync::Download.new(:files => [
+  "#{Dir.home}/.bash_profile",
+  "#{Dir.home}/.gitconfig",
+  "#{Dir.home}/.ssh/config"
+])
 ````
 
 ## Development
