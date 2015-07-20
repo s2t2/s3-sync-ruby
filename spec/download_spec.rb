@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 module S3Sync
   RSpec.describe Download do
     describe '#new' do
