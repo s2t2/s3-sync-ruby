@@ -1,5 +1,7 @@
 # s3_sync
 
+[![Gem Version](https://badge.fury.io/rb/s3_sync.svg)](http://badge.fury.io/rb/s3_sync)
+
 Securely sync (upload and download) files with [Amazon Simple Storage Service (s3)](http://aws.amazon.com/s3).
 
 Specify credentials, file names, and other options during configuration.
