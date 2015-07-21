@@ -1,6 +1,8 @@
 # s3_sync
 
-Securely upload and download development environment configuration files from [AWS s3](http://aws.amazon.com/s3).
+Securely sync (upload and download) files with [Amazon Simple Storage Service (s3)](http://aws.amazon.com/s3).
+
+Specify credentials, file names, and other options during configuration.
 
 ## Installation
 
@@ -17,18 +19,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install s3_sync
-
-## Prerequisites
-
-Create an AWS IAM user. Note the access credentials: "Access Key Id" and "Secret Access Key".
-
-Create an AWS IAM group.
-
-Create an AWS IAM policy with **arn:aws:iam::aws:policy/AmazonS3FullAccess**.
-
-Attach the policy to the group.
-
-Add the user to the group.
 
 ## Usage
 
@@ -60,27 +50,45 @@ Upload files from your computer to s3.
 S3Sync::Upload.new
 ````
 
-Files are stored in the **latest backups directory** which is named after the date (*YYYY-MM-DD*) of backup.
+ The uploads bucket gets created automatically, and can be configured with `config.bucket`.
 
 ### Downloading
 
-Download previously-uploaded files from s3 to a staging directory for further action. The staging directory helps mitigate the risk of accidentally over-writing your local files.
+Download files from s3 to your computer.
 
 ```` rb
 S3Sync::Download.new
 ````
 
+Files are downloaded to a staging directory, which can be configured with `config.downloads_dir`. The staging directory helps mitigate the risk of accidentally over-writing local files.
+
+## Prerequisites
+
+Create an [AWS Identity and Access Management (IAM)](http://aws.amazon.com/iam/) user and obtain its **Access Key Id** and **Secret Access Key**.
+
+Create an AWS IAM group.
+
+Create an AWS IAM policy with **arn:aws:iam::aws:policy/AmazonS3FullAccess**.
+
+Attach the policy to the group.
+
+Add the user to the group.
+
 ## Contributing
 
-Check out
+Browse [existing issues](https://github.com/s2t2/s3-sync-ruby/issues) or create a [new issue](https://github.com/s2t2/s3-sync-ruby/issues/new) to communicate bugs, desired features, etc.
 
-### Insallation
+After forking the repo and pushing your changes, create a [pull request](https://github.com/s2t2/s3-sync-ruby/pulls/new) referencing the applicable issue(s).
+
+### Installation
+
+Check out the repo with `git clone git@github.com:s2t2/s3-sync-ruby.git`, and `cd s3-sync-ruby`.
 
 After checking out the repo, run `bin/setup` to install dependencies.
 
 ### Testing
 
-Run `bundle exec rake` `or bundle exec rspec spec/` to run the tests.
+Run `bundle exec rake` or `bundle exec rspec spec/` to run the tests.
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 

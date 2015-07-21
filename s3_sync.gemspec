@@ -9,9 +9,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["MJ Rossetti (@s2t2)"]
   spec.email         = ["s2t2mail+git@gmail.com"]
 
-  spec.summary       = %q{Securely upload and download development environment configuration files from [AWS s3](http://aws.amazon.com/s3).}
-  spec.description   = %q{Securely upload and download development environment configuration files from [AWS s3](http://aws.amazon.com/s3).}
-  spec.homepage      = "https://github.com/s2t2/s3_sync"
+  spec.summary       = %q{Securely sync (upload and download) files with Amazon Simple Storage Service (s3).}
+  spec.description   = %q{Securely sync (upload and download) files with Amazon Simple Storage Service (s3). Specify credentials, file names, and other options during configuration.}
+
+  spec.homepage      = "https://github.com/s2t2/s3-sync-ruby"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
