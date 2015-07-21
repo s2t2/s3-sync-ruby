@@ -76,11 +76,11 @@ Files are downloaded to a staging directory, which can be configured with `confi
 
 ## Prerequisites
 
-Create an [AWS Identity and Access Management (IAM)](http://aws.amazon.com/iam/) user and obtain its **Access Key Id** and **Secret Access Key**.
+Create an [AWS Identity and Access Management (IAM)](http://aws.amazon.com/iam/) user and obtain its *Access Key Id* and *Secret Access Key*.
 
 Create an AWS IAM group.
 
-Create an AWS IAM policy with **arn:aws:iam::aws:policy/AmazonS3FullAccess**.
+Create an AWS IAM policy with the *arn:aws:iam::aws:policy/AmazonS3FullAccess* permission set.
 
 Attach the policy to the group.
 
