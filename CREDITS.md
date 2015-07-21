@@ -3,3 +3,5 @@
  + https://robots.thoughtbot.com/mygem-configure-block
  + http://brandonhilkert.com/blog/ruby-gem-configuration-patterns/
  + http://stackoverflow.com/questions/10584638/setting-up-configuration-settings-when-writing-a-gem
+ + http://docs.aws.amazon.com/sdkforruby/api/index.html
+ +

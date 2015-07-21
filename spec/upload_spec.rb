@@ -16,7 +16,6 @@ module S3Sync
               File.join(Dir.home,".gitconfig"),
               File.join(Dir.home,".ssh","config")
             ]
-
           end
         end
 
