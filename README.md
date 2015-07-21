@@ -42,6 +42,18 @@ S3Sync.configure do |config|
 end
 ````
 
+#### Configuration Options
+
+attribute name | description | default value
+--- | --- | ---
+`key_id` | The s3 user's *Access Key Id*. | N/A
+`key_secret` | The s3 user's *Access Key Secret*. | N/A
+`region` | The s3 region. | N/A
+`bucket` | The s3 bucket (top-level directory) name. | N/A
+`secret_phrase` | The phrase to use when encrypting and decrypting files. | N/A
+`files` | A list of local file paths to be synced. | N/A
+`downloads_dir` | A staging directory to house downloaded files. | `File.join(Dir.home,"Desktop","s3-downloads")`
+
 ### Uploading
 
 Upload files from your computer to s3.
@@ -50,7 +62,7 @@ Upload files from your computer to s3.
 S3Sync::Upload.new
 ````
 
- The uploads bucket gets created automatically, and can be configured with `config.bucket`.
+The uploads bucket gets created automatically, and can be configured with `config.bucket`.
 
 ### Downloading
 
