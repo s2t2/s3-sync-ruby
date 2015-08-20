@@ -22,25 +22,36 @@ Or install it yourself as:
 
     $ gem install s3_sync
 
+## Prerequisites
+
+Create an [AWS Identity and Access Management (IAM)](http://aws.amazon.com/iam/) user.
+
+> Note: the s3 user's *Access Key Id* and *Secret Access Key*
+
+Create an AWS IAM policy with the permissions:
+
+    arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+Create an AWS IAM group, add the user to the group, and attach the policy to the group.
+
 ## Usage
 
 ### Configuring
 
-Configure the gem to use the same options when uploading and downloading.
+Use the same options when uploading and downloading.
 
 ```` rb
 S3Sync.configure do |config|
   config.key_id = "mykey123"
-  config.key_secret = "secret456"
+  config.key_secret = "mysecret456"
   config.region = "us-east-1"
-  config.bucket = "my-backups"
-  config.secret_phrase = "my-s3cr3t"
+  config.bucket = "s3-uploads"
+  config.secret_phrase = "supersecret"
   config.files = [
-    File.join(Dir.home,".bash_profile"),
     File.join(Dir.home,".gitconfig"),
     File.join(Dir.home,".ssh","config")
   ]
-  config.downloads_dir = File.join(Dir.home,"Desktop","my-s3-downloads")
+  config.downloads_dir = File.join(Dir.home,"Desktop","s3-downloads")
 end
 ````
 
@@ -75,18 +86,6 @@ S3Sync::Download.new
 ````
 
 Files are downloaded to a staging directory, which can be configured with `config.downloads_dir`. The staging directory helps mitigate the risk of accidentally over-writing local files.
-
-## Prerequisites
-
-Create an [AWS Identity and Access Management (IAM)](http://aws.amazon.com/iam/) user and obtain its *Access Key Id* and *Secret Access Key*.
-
-Create an AWS IAM group.
-
-Create an AWS IAM policy with the *arn:aws:iam::aws:policy/AmazonS3FullAccess* permission set.
-
-Attach the policy to the group.
-
-Add the user to the group.
 
 ## Contributing
 

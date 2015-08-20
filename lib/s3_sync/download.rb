@@ -19,10 +19,16 @@ module S3Sync
 
       object_keys = []
       objects = client.list_objects(:bucket => @bucket)
-      while objects.last_page? == false
+
+      if objects.next_page?
+        while objects.last_page? == false
+          object_keys << objects.contents.map{|obj| obj.key}
+          objects = objects.next_page
+        end
+      else
         object_keys << objects.contents.map{|obj| obj.key}
-        objects = objects.next_page
       end
+
       object_directories = object_keys.flatten.map{|str| str.split("/").first}.compact.uniq
       days = object_directories.map{|str| Date.parse(str) rescue nil}.compact
       latest_day = days.max.to_s
